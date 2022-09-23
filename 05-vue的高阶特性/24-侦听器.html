@@ -6,13 +6,20 @@
 </head>
 <body>
 <div id="app">
-  品牌
+  品牌<input v-model="brand">
+  <p>输入的品牌是{{brand}}</p>
 </div>
 <script src="js/vue.js"></script>
 <script>
   const App = Vue.createApp({
     setup(props,context){
+      const {ref} = Vue;
+      let brand = ref('');
 
+
+      return{
+        brand
+      }
     }
   }).mount('#app');
 </script>

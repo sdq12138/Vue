@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <label>id:<input type="text"  v-model="id"></label>
+  <label>name:<input type="text"  v-model="name"></label>
+  <button @click="addMsg()">add</button>
+  <p>====================================</p>
+  <ul>
+    <li v-for="item in personArr" :key="item.id"><!--使用key绑定对象独有信息（标识）能使在动态改变或者插入数据时，不会出现问题-->
+      <input type="checkbox"><!--复选框-->
+      {{item.id}} -- {{item.name}}
+    </li>
+  </ul>
+</div>
+<script src="js/vue.js"></script>
+<script>
+  const App = Vue.createApp({
+    data() {
+      return {
+        id:'',
+        name:'',
+        personArr:[
+          {id:1,name:'张三'},
+          {id:2,name:'李四'},
+          {id:3,name:'王五'},
+          {id:4,name:'老六'},
+          {id:5,name:'陈七'}
+        ]
+      }
+    },
+    methods:{
+      addMsg(){
+        //在头部添加
+        //this.personArr.unshift({id: this.id, name: this.name});
+        //在中间添加
+        this.personArr.splice(2,0,{id: this.id, name: this.name});//这里的2指在第二个位置后面添加，0指往后删除0项数据
+        //在尾部添加
+        //this.personArr.push({id: this.id, name: this.name});
+      }
+    }
+  }).mount('#app');
+</script>
+</body>
+</html>

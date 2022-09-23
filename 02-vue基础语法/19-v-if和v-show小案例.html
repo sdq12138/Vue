@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>登录方式</title>
+</head>
+<body>
+<!--<div id="app">
+  <div v-if="loginType === 'phone'">
+    <label>手机</label>
+    <input type="text" placeholder="请输入手机号"><br>
+    <label>密码</label>
+    <input type="text" placeholder="请输入密码">
+  </div>
+  <div v-else-if="loginType === 'Email'" >
+    <label>邮箱</label>
+    <input type="text" placeholder="请输入邮箱"><br>
+    <label>密码</label>
+    <input type="text" placeholder="请输入密码">
+  </div>
+  <button @click="change()">切换登录方式</button>
+</div>-->
+<div id="app">
+  <div v-show="loginType === 'phone'">
+    <label>手机</label>
+    <input type="text" placeholder="请输入手机号"><br>
+    <label>密码</label>
+    <input type="text" placeholder="请输入密码">
+  </div>
+  <div v-show="loginType === 'Email'" >
+    <label>邮箱</label>
+    <input type="text" placeholder="请输入邮箱"><br>
+    <label>密码</label>
+    <input type="text" placeholder="请输入密码">
+  </div>
+  <button @click="change()">切换登录方式</button>
+</div>
+<!--v-show只创建一次标签会导致信息重复出现-->
+<script src="js/vue.js"></script>
+<script>
+  const App = Vue.createApp({
+    data() {
+      return {
+        loginType:'phone'
+      }
+    },
+    methods:{
+      change(){
+        this.loginType === 'phone' ? this.loginType = 'Email' : this.loginType = 'phone';
+      }
+    }
+  }).mount('#app');
+</script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<style>
+  body{
+    text-align: center;/*居中*/
+  }
+  ul li{
+    list-style: none;/*每行标点取消*/
+    line-height: 40px;/*行高*/
+    background-color: pink;
+  }
+  button{
+    color: red;
+  }
+  h3{
+    color: mediumpurple;
+  }
+</style>
+<body>
+<div id="app">
+  <h3>搜索列表</h3>
+  <label>
+    <input type="text" placeholder="请输入需要搜索的姓名" v-model="searchStr">
+  </label>
+  <div>
+    <h3>按年龄排序</h3>
+    <button @click="changeOrdertype(1)">升序</button>
+    <button @click="changeOrdertype(2)">降序</button>
+    <button @click="changeOrdertype(0)">还原</button>
+  </div>
+  <ul>
+    <li v-for="(person,index) in filterPersons">{{index + 1}}-姓名:{{person.name}},年龄:{{person.age}},住址:{{person.address}}</li>
+  </ul>
+</div>
+<script src="js/vue.js"></script>
+<script>
+  const App = Vue.createApp({
+    data() {
+      return {
+        persons:[
+          {name:'小张',age:25,address:'上海'},
+          {name:'小张',age:20,address:'上海'},
+          {name:'小张',age:256,address:'上海'},
+          {name:'小张',age:20,address:'上海'},
+          {name:'小张',age:1,address:'上海'},
+          {name:'小张',age:20,address:'上海'},
+          {name:'小张',age:20,address:'上海'},
+          {name:'小张',age:20,address:'上海'},
+          {name:'小张',age:20,address:'上海'},
+          {name:'小张',age:20,address:'上海'},
+          {name:'张飞',age:80,address:'上海'},
+          {name:'小张',age:10,address:'上海'},
+          {name:'小李',age:21,address:'广东'},
+          {name:'小李',age:213,address:'广东'},
+          {name:'小李飞刀',age:100,address:'广东'},
+          {name:'小李',age:21,address:'广东'},
+          {name:'小李',age:21,address:'广东'},
+          {name:'小李',age:21,address:'广东'},
+          {name:'小刘',age:22,address:'广西'},
+          {name:'小刘',age:22,address:'广西'},
+          {name:'小刘',age:22,address:'广西'},
+          {name:'小刘',age:22,address:'广西'},
+          {name:'小刘',age:22,address:'广西'},
+          {name:'小刘',age:22,address:'广西'},
+          {name:'小刘',age:22,address:'广西'},
+        ],
+        //关联输入框
+        searchStr:'',
+        //flag:0 默认 1:升序 2:降序
+        orderType:0
+      }
+    },
+    //计算属性
+    computed:{
+      filterPersons(){//过滤person属性
+        //1、取出相关属性
+        const {persons, searchStr, orderType} = this;
+        //2、定义过滤数组
+        let arr = [...persons];//延展
+        //3、根据条件过滤
+        if(searchStr.trim()){//过滤两边的空格
+
+          arr = persons.filter((p)=>{
+              return p.name.indexOf(searchStr) !== -1;//不等于-1就能找到 等于-1就找不到
+          });
+        }
+        //4、排序
+        if(orderType){
+          arr.sort((p1,p2) =>{
+            if(orderType ===2){//降序
+              return p2.age - p1.age;
+            }else{//升序
+             return  p1.age - p2.age;
+            }
+          });
+        }
+        //5、返回过滤后的数组
+        return arr;
+      }
+    },
+    methods:{
+      changeOrdertype(orderType){
+        this.orderType = orderType;
+      }
+    }
+  }).mount('#app');
+</script>
+</body>
+</html>

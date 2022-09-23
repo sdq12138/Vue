@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+<div id="app">
+  <lt-box>
+    <button>点我试试</button>
+  </lt-box>
+  <lt-box>
+    <input type="text" placeholder="请输入内容">
+  </lt-box>
+  <lt-box></lt-box>
+</div>
+<template id="box">
+  <div style="background-color: aquamarine;width: 200px;height: 200px;margin: 20px">
+    <p>hello world</p>
+    <p>it like</p>
+    <!--<button>点我试试</button>-->
+    <!--使用插槽-->
+    <slot>此处是默认内容</slot>
+  </div>
+</template>
+<script src="js/vue.js"></script>
+<script>
+  const Box = {
+    template:'#box',
+  };
+  const App = Vue.createApp({
+    data() {
+      return {
+
+      }
+    },
+    components:{
+      'lt-box':Box,
+    }
+  }).mount('#app');
+</script>
+</body>
+</html>

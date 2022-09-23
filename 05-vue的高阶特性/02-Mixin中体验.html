@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+<div id="App1">
+  <h1>{{msg}}1</h1>
+  <h2>{{site}}</h2>
+  <button @click="hello">打个招呼</button>
+  <button @click="change">改变</button>
+</div>
+<p>----------------------------------------</p>
+<div id="App2">
+  <h1>{{msg}}2</h1>
+  <button @click="hello">打个招呼</button>
+</div>
+<script src="js/vue.js"></script>
+<script>
+  const MyMixin = {
+      data(){
+        return{
+          msg: 'hello world'
+        }
+      },
+      methods:{
+        hello(){
+          alert('你好，世界');
+        }
+      },
+    mounted(){
+      console.log('========实列完成==========');
+    },
+  };
+  /*若mixin中的选项和实列中的选项值不同，两者则合并，若相同则以实列对象中的选项为唯一标准*/
+  const App1 = Vue.createApp({
+    /*生命周期中先执行mixin中的再执行实列中的*/
+    mounted(){
+      console.log('-------实列完成---------');
+    },
+      data(){
+        return{
+          msg:'www.like.com'
+        }
+      },
+      mixins:[MyMixin],
+      methods:{
+        hello(){
+          alert('want to change something');
+        }
+    }
+  });
+  /*const App2 = Vue.createApp({
+    mixins:[MyMixin],
+  });*/
+  App1.mount('#App1');
+  /*App2.mount('#App2')*/
+</script>
+</body>
+</html>

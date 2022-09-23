@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <style>
+    body{
+      font-size: 50px;
+      text-align: center;
+    }
+    /*做透明度变化*/
+    .v-enter-from{
+      opacity: 0;
+    }
+    .v-enter-active,
+    .v-leave-active{
+      transition: all 2s ease-in;
+    }
+    .v-enter-to{
+      opacity: 1;
+    }
+    .v-leave-to{
+      opacity: 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <transition mode="out-in" appear><!--out-in:旧元素退出，新元素进入。。。in-out相反 appear从开始就 -->
+      <button v-if="flag">点我</button>
+      <p v-else>{{msg}}</p>
+    </transition>
+    <p>------------------------</p>
+    <button @click="handleClick">切换</button>
+  </div>
+  <script src="js/vue.js"></script>
+  <script>
+    const App = Vue.createApp({
+      data() {
+        return {
+          msg: 'hello world',
+          flag:true
+        }
+      },
+      methods:{
+        handleClick(){
+          this.flag = !this.flag;
+        }
+      }
+    }).mount('#app');
+  </script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <input type="text" v-model="msg">
+  <h2>{{msg}}</h2>
+</div>
+<script src="js/vue.js"></script>
+<script>
+  const App = Vue.createApp({
+    data() {
+      return {
+        msg: 'hello world'
+      }
+    }
+  }).mount('#app');
+</script>
+</body>
+</html>

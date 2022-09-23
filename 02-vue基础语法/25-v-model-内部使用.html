@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <label>
+    方法一:<input type="text" :value="msg" @input="valueChange"><br>
+  </label>
+  <label>
+    方法二:<input type="text" :value="msg" @input="msg=$event.target.value">
+  </label>
+  <h1>{{msg}}</h1>
+</div>
+<script src="js/vue.js"></script>
+<script>
+  const App = Vue.createApp({
+    data() {
+      return {
+        msg: 'hello world'
+      }
+    },
+    methods:{
+      valueChange(event){
+        this.msg = event.target.value;
+      }
+    }
+  }).mount('#app');
+</script>
+</body>
+</html>

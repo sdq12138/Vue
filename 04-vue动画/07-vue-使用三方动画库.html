@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <!--引入样式-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <style>
+    .box{
+      background-color: pink;
+      width: 100px;
+      height: 100px;
+    }
+    /*入场动画类*/
+    .s1{
+      opacity: 0;
+    }
+    .s2,
+    .s3{
+      transition: all 2s ease-in;
+    }
+    .s4{
+      opacity: 1;
+    }
+    /*离场动画类*/
+    /* .v-leave-from{
+       opacity: 1;
+     }上面入场时已经给它默认为1了可以不用写*/
+    .s5{
+      opacity: 0;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <transition
+      enter-active-class="animate__animated animate__shakeX"
+      leave-active-class="animate__animated animate__flash"
+      :duration="{enter:3000,leave:300}">
+    <div v-show="flag" class="box">{{msg}}</div>
+  </transition>
+  <button @click="flag = !flag">切换</button>
+</div>
+<script src="js/vue.js"></script>
+<script>
+  const App = Vue.createApp({
+    data() {
+      return {
+        msg: 'hello world',
+        flag:false
+      }
+    }
+  }).mount('#app');
+</script>
+</body>
+</html>

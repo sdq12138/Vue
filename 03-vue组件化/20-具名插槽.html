@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+<div id="app">
+  <lt-box>
+    <!--错误写法-->
+    <!--<h1>我是头部</h1>
+    <h2>我是身体</h2>
+    <h3>我是尾部</h3>-->
+    <template v-slot:header>
+      <button>我是头部</button>
+    </template>
+   <!-- <template v-slot:content>
+      <input type="text" placeholder="我是身体">
+    </template>-->
+    <template v-slot:default><!--默认将一切没有实名的替换进来-->
+      <input type="text" placeholder="我是身体">
+    </template>
+    <template v-slot:footer>
+      <button>我是尾部</button>
+    </template>
+  </lt-box>
+</div>
+<template id="box">
+  <div>
+    <!--头部内容-->
+    <header>
+      <slot name="header">头部内容</slot><!--//实名插槽-->
+    </header>
+    <!--主要内容-->
+    <main>
+      <slot>主要内容</slot><!--匿名插槽-->
+    </main>
+    <!--尾部内容-->
+    <footer>
+      <slot name="footer">尾部内容</slot>
+    </footer>
+  </div>
+</template>
+<script src="js/vue.js"></script>
+<script>
+  const Box = {
+    template:'#box'
+  };
+  const App = Vue.createApp({
+    data() {
+      return {
+
+      }
+    },
+    components:{
+      'lt-box':Box,
+    }
+  }).mount('#app');
+</script>
+</body>
+</html>

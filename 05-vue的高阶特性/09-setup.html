@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+<div id="app">
+  <h1>{{msg}}</h1>
+  <button @click="log">点我</button>
+  <button @click="deal">处理</button>
+</div>
+<script src="js/vue.js"></script>
+  <script>
+    const App = Vue.createApp({
+     setup(props,context){
+       /*props:组件，context:上下文*/
+       /*setup是实例挂载之前，还没有挂载，不能调用this*/
+       //this.deal();
+       return{
+         msg:'hello world',
+         log: ()=>{
+           alert('点到我了')
+         }
+       }
+     },
+      methods:{
+       deal(){
+         //alert('触发了');
+         console.log(this.$options.setup());
+       }
+      }
+    }).mount('#app');
+  </script>
+</body>
+</html>

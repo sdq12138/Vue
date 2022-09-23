@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <h1>{{msg}}</h1>
+  <h1>{{firstName + ' ' + lastName}}</h1>
+  <h1>计算:{{count + 2}}</h1>
+  <!--双括号语法也交mustache语法-->
+  <!--括号内可以是变量也可以是表达式-->
+  <!--双括号语法一般放在标签的中间-->
+</div>
+<script src="js/vue.js"></script>
+<script>
+  const App = Vue.createApp({
+    data() {
+      return {
+        msg: 'hello world',
+        firstName: 'it',
+        lastName: 'heima',
+        count:1,
+      }
+    }
+  }).mount('#app');
+</script>
+</body>
+</html>

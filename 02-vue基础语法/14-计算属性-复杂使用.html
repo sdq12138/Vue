@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <div id="app">
+    <p>会员总积分{{members[0].score + members[1].score + members[2].score + members[3].score}}</p>
+    <!--合适方法:函数或计算属性-->
+    <p>会员总积分{{totalScore}}</p>
+  </div>
+  <script src="js/vue.js"></script>
+  <script>
+    const App = Vue.createApp({
+      data() {
+        return {
+          members:[
+            {id:'001', name:'张三',score:1},
+            {id:'002', name:'李四',score:2},
+            {id:'003', name:'王五',score:3},
+            {id:'004', name:'老六',score:4}
+          ]
+        }
+      },
+      computed:{
+        totalScore(){
+          let total = 0;
+          for(let member of this.members){
+            total += member.score;
+          }
+          return total;
+        }
+      }
+    }).mount('#app');
+  </script>
+</body>
+</html>

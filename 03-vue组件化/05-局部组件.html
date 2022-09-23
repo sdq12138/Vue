@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <cl></cl>
+  <bb></bb>
+</div>
+<script src="js/vue.js"></script>
+<script>
+  //局部组件比全局组件更常用
+  //局部组件1
+  const click = {
+    data(){//要使用变量时，可以用
+      return{
+        count:0
+      }
+    },
+    template:'<button @click="count++">点击了{{count}}次</button>'
+  }
+  //局部组件2
+  /*组件内的相互使用错误示范
+  const box = {
+    template: '<div style="width: 100px;height: 100px;background-color: mediumpurple">盒子选项<cl></cl></div>'
+  }*/
+  const box = {
+    components: {
+      'cc':click,
+    },
+    template: '<div style="width: 100px;height: 100px;background-color: mediumpurple">盒子选项<cc></cc></div>'
+  }
+  //创建实例对象
+  const App = Vue.createApp({
+    data() {
+      return {
+        msg: 'hello world'
+      }
+    },
+    //组件选项
+    components:{
+     'cl':click,
+      'bb':box,
+    }
+  });
+  //挂载实例
+  App.mount('#app');
+</script>
+</body>
+</html>

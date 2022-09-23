@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+<div id="app">
+  <lt-box></lt-box>
+</div>
+<script src="js/vue.js"></script>
+<script>
+  const LtButton = {
+    data(){
+      return{
+        count:0,
+      }
+    },
+    template:'<button @click="btbox">点击了{{count}}次</button>',
+    methods:{
+      btbox() {
+        this.count++;
+        //子组件访问父组件 不建议使用，破坏组件的封闭性
+/*        console.log(this.$parent);
+        console.log(this.$parent.a);*/
+        //子组件访问根组件
+        console.log(this.$root);
+        console.log(this.$root.msg);
+      }
+    }
+  }
+  const LtBox = {
+    data(){
+      return{
+        a:'hhhh'
+      }
+    },
+    template: '<div style="background-color: pink;width: 100px;height: 100px">' +
+        '<lt-button></lt-button></div>',
+    components:{
+      'lt-button':LtButton,
+    }
+  }
+  const App = Vue.createApp({
+    data() {
+      return {
+      msg:'hello world'
+      }
+    },
+    components:{
+      'lt-box':LtBox
+    }
+  }).mount('#app');
+</script>
+</body>
+</html>

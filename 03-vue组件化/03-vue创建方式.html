@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <h1>{{msg}}</h1>
+</div>
+<div id="app1">
+  <h1>{{msg1}}</h1>
+</div>
+<script src="js/vue.js"></script>
+<script>
+  const App = Vue.createApp({
+    data() {
+      return {
+        msg: 'hello world'
+      }
+    }
+  }).mount('#app');
+  const app1 = Vue.createApp({
+    data() {
+      return {
+        msg1: 'hello world!'
+      }
+    }
+  }).mount('#app1')
+</script>
+</body>
+</html>

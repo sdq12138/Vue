@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <style>
+    .box{
+      background-color: pink;
+      width: 100px;
+      height: 100px;
+    }
+    /*入场动画类*/
+    .v-enter-from{
+      opacity: 0;
+    }
+    .v-enter-active,
+    .v-leave-active{
+      transition: all 2s ease-in;
+    }
+    .v-enter-to{
+      opacity: 1;
+    }
+    /*离场动画类*/
+   /* .v-leave-from{
+      opacity: 1;
+    }上面入场时已经给它默认为1了可以不用写*/
+    .v-leave-to{
+      opacity: 0;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <transition>
+    <div v-show="flag" class="box">{{msg}}</div>
+  </transition>
+  <button @click="flag = !flag">切换显示</button>
+</div>
+  <script src="js/vue.js"></script>
+  <script>
+    const App = Vue.createApp({
+      data() {
+        return {
+          msg: 'hello world',
+          flag:false
+        }
+      },
+    }).mount('#app');
+</script>
+</body>
+</html>

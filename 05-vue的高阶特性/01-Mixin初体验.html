@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+<div id="App1">
+  <h1>{{msg}}1</h1>
+  <button @click="hello">打个招呼</button>
+</div>
+<div id="App2">
+  <h1>{{msg}}2</h1>
+  <button @click="hello">打个招呼</button>
+</div>
+<script src="js/vue.js"></script>
+<script>
+  //定义一个mixin对象
+  //可以在多个选项中用
+  const MyMixin = {
+      data(){
+        return{
+          msg: 'hello world'
+        }
+      },
+      methods:{
+        hello(){
+          alert('你好，世界');
+        }
+      }
+  };
+  const App1 = Vue.createApp({
+      mixins:[MyMixin],
+  });
+  const App2 = Vue.createApp({
+    mixins:[MyMixin],
+  });
+  App1.mount('#App1');
+  App2.mount('#App2')
+</script>
+</body>
+</html>

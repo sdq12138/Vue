@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+<div id="app">
+  <lt-box></lt-box>
+  <p>------------------------------------------------------</p>
+  <lt-box>
+    <template v-slot:default="propsPerson"><!--使用匿名插槽，让propsPerson拿到persons对象-->
+      <span>{{propsPerson.data.join('---------')}}</span>
+    </template>
+  </lt-box>
+  <p>------------------------------------------------------</p>
+  <lt-box>
+    <template v-slot:default="propsPerson"><!--使用匿名插槽，让propsPerson拿到persons对象-->
+      <span>{{propsPerson.data.join('*****')}}</span>
+    </template>
+  </lt-box>
+</div>
+<template id="box">
+  <div style="background-color: pink;width: 200px;height: 200px;margin: 20px">
+    <slot  :data="persons"><!--注意，这里用的动态绑定-->
+      <ul>
+        <li v-for="p in persons">{{p}}</li>
+      </ul>
+    </slot>
+  </div>
+</template>
+<script src="js/vue.js"></script>
+<script>
+  const Box = {
+    data(){
+      return{
+        persons:['张三','李四','王五']
+      }
+    },
+    template:'#box'
+  };
+  const App = Vue.createApp({
+    data() {
+      return {
+
+      }
+    },
+    components:{
+      'lt-box':Box,
+    }
+  }).mount('#app');
+</script>
+</body>
+</html>

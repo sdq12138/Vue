@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <label><input name = "sex" type="radio" value="男" v-model="sex">男</label><!--用name避免双选-->
+  <label><input name = "sex" type="radio" value="女" v-model="sex">女</label>
+  <p>========================================</p>
+  <p>选择的性别是:{{sex}}</p>
+</div>
+<script src="js/vue.js"></script>
+<script>
+  const App = Vue.createApp({
+    data() {
+      return {
+        sex:'男' //此处可以写默认值
+      }
+    }
+  }).mount('#app');
+</script>
+</body>
+</html>

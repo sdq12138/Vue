@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+<div id="app">
+  <h1>一般价:{{price}}</h1>
+  <h2>折后价:{{discountPrice}}</h2>
+  <h3>会员价:{{vipPrice}}</h3>
+</div>
+<script src="js/vue.js"></script>
+<script>
+  const App = Vue.createApp({
+    data() {
+      return {
+        price: 10,
+        vipPrice:0
+      }
+    },
+    //计算属性
+    /*
+    1、计算属性在调用时需要在模板中渲染
+    2、默认时深度依赖
+    3、适合做筛选，不可以异步
+    */
+    computed:{
+      discountPrice(){
+        return this.price * 0.8;
+      }
+    },
+    //侦听器
+    /*
+    1、默认时浅度依赖
+    2、可以做异步操作或开销较大的操作
+    */
+    watch:{
+      price(current,prev){
+       /* console.log(current, prev);/!*现在的值和过去的值*!/
+        ;*/
+
+        //异步操作
+        setTimeout(()=>{
+          console.log('监听到值发生改变')
+          this.vipPrice = current * 0.5;
+        },2000);//延时两秒
+      }
+    }
+  }).mount('#app');
+</script>
+</body>
+</html>

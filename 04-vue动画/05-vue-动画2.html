@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <style>
+    .box{
+      background-color: pink;
+      width: 100px;
+      height: 100px;
+    }
+    @keyframes shake-from{
+      0%{
+        opacity:0;
+        transform: translateX(0);
+      }
+      50%{
+        opacity:50%;
+        transform: translateX(50px);
+      }
+      100%{
+        opacity:100%;
+        transform: translateX(0);
+      }
+    }
+    @keyframes shake-to{
+      0%{
+        opacity:1;
+        transform: translateX(0);
+      }
+      50%{
+        opacity:50%;
+        transform: translateX(50px);
+      }
+      100%{
+        opacity:0;
+        transform: translateX(0);
+      }
+    }
+    .lt-enter-active{ /*v可以用自己定义的name替换，方便以后的调用*/
+      animation: 2s shake-from;
+    }
+    .lt-leave-active{
+      animation: 2s shake-to;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <transition name="lt"><div v-show="flag" class="box">{{msg}}</div></transition>
+  <transition><div v-show="flag" class="box">{{msg}}</div></transition>
+  <transition><div v-show="flag" class="box">{{msg}}</div></transition>
+  <transition><div v-show="flag" class="box">{{msg}}</div></transition>
+  <button @click="flag = !flag">切换显示</button></h1>
+</div>
+<script src="js/vue.js"></script>
+<script>
+  const App = Vue.createApp({
+    data() {
+      return {
+        msg: 'hello world',
+        flag:false
+      }
+    }
+  }).mount('#app');
+</script>
+</body>
+</html>

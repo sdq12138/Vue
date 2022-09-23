@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+<div id="app">
+  <h1>{{msg}}</h1>
+
+</div>
+<script src="js/vue.js"></script>
+  <script>
+    /*
+    ref:让基础类型的数据具备响应式(可以响应式更改内容)
+     */
+    const App = Vue.createApp({
+     setup(props,context){
+       //1.引入ref
+       const {ref} = Vue;
+       //通过proxy, 'hello wordl' --> proxy({value:'hello world'})
+      let msg = ref('hello world');
+      //通过proxy包装，类型已经更改为value，在改变值的时候需要注意
+      setTimeout(()=>{
+        msg.value= '你好';
+      },2000)
+
+       return{
+          msg,
+       }
+     },
+    }).mount('#app');
+  </script>
+</body>
+</html>

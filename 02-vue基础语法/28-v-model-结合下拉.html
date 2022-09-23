@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <p>选择所在的城市</p>
+  <select name="name" v-model="choice">
+    <option value="上海">上海</option>
+    <option value="天津">天津</option>
+    <option value="武汉">武汉</option>
+  </select>
+  <p>用户选择的城市是:{{choice}}</p>
+  <p>====================================</p>
+  <p>选择所在的城市</p>
+  <select name="name" v-model="choices" multiple><!--可多选-->
+    <option value="上海">上海</option>
+    <option value="天津">天津</option>
+    <option value="武汉">武汉</option>
+  </select>
+  <p>用户选择的城市是:{{choices}}</p>
+</div>
+<script src="js/vue.js"></script>
+<script>
+  const App = Vue.createApp({
+    data() {
+      return {
+        choice:'上海',//可规定默认值
+        choices:[]
+      }
+    }
+  }).mount('#app');
+</script>
+</body>
+</html>

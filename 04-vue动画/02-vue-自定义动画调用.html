@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<style>
+  @keyframes shake{
+    0%{
+      transform:translateX(0);
+    }
+    50%{
+      transform:translateX(50px);
+    }
+    100%{
+      transform:translateX(0);
+    }
+  }
+  .box{
+    width: 100px;
+    height: 100px;
+    background-color: pink;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }
+  .animate{
+    animation: shake 2s infinite alternate;/*此处的infinite的作用是正着过去，反着过来，alternate是保持infinite的作用*/
+   }
+</style>
+<body>
+<div id="app">
+  <div class="box" :class="{animate: isAnimate}">hello</div>
+  <button @click="deal">开始/结束</button>
+</div>
+<script src="js/vue.js"></script>
+<script>
+  const App = Vue.createApp({
+    data() {
+      return {
+        isAnimate:false
+      }
+    },
+    methods:{
+      deal(){
+        this.isAnimate = !this.isAnimate;
+      }
+    }
+  }).mount('#app');
+</script>
+</body>
+</html>

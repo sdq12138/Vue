@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+<div id="app">
+  <!--<div v-show="isShow">
+    <input type="text" v-focus>
+  </div>-->
+  <!--v-show是内容的显示与隐藏-->
+  <!--v-is是创建和销毁-->
+  <div v-if="isShow">
+    <input type="text" v-focus>
+  </div>
+  <button @click="this.isShow = !this.isShow">切换</button>
+</div>
+  <script src="js/vue.js"></script>
+  <script>
+    const ltDirective = {
+      focus:{
+        created(){
+          console.log('created()');
+        },
+        beforeMount(){
+          console.log('beforeMount()');
+        },
+        mounted(el){
+          console.log('mounted()');
+          el.focus();
+        },
+        beforeUpdate(){
+          console.log('beforeUpdate()');
+        },
+        updated(){
+          console.log('update()');
+        },
+        beforeUnmount(){
+          console.log('beforeUnmount()');
+        },
+        unmounted(){
+          console.log('unmounted()');
+        }
+      }
+    };
+    const app = Vue.createApp({
+      data() {
+        return {
+         isShow:true,
+        }
+      },
+      directives:ltDirective,
+    });
+    app.mount('#app');
+  </script>
+</body>
+</html>

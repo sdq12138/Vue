@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <cl></cl>
+  <div>
+    <cl></cl>
+  </div>
+  <bb></bb>
+</div>
+<script src="js/vue.js"></script>
+<script>
+  //局部组件比全局组件更常用
+  //局部组件1
+  const click = {
+    data(){//要使用变量时，可以用
+      return{
+        count:0
+      }
+    },
+    template:'<button @click="count++">点击了{{count}}次</button>'
+  }
+  const box = {
+    components: {
+      'cl':click,//在此处注册的cl只能在box组件内使用，只能在此处往内走使用，在box的上一级用不了cl,如果要使用得在上一级的components内初始化
+    },
+    template: '<div style="width: 100px;height: 100px;background-color: mediumpurple">盒子选项<cl></cl></div>'
+  }
+  //创建实例对象
+  const App = Vue.createApp({
+    data() {
+      return {
+        msg: 'hello world'
+      }
+    },
+    //组件选项
+    components:{
+     //'cl':click,
+      'bb':box,
+    }
+  });
+  //挂载实例
+  App.mount('#app');
+</script>
+</body>
+</html>

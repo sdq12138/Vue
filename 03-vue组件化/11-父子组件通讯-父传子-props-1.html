@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+<div id="app">
+  <click-box :brand="msg1" :colleges="msg2"></click-box>
+</div>
+<template id="box">
+  <div>
+    <p>-------------------------</p>
+    <h1>{{brand}}</h1>
+    <ul>
+      <li v-for="(item,index) in colleges">{{index + 1}}-{{item}}</li>
+    </ul>
+    <p>-------------------------</p>
+  </div>
+</template>
+<script src="js/vue.js"></script>
+<script>
+  const box = {
+    template:'#box',
+    //接收数据
+    props:['brand','colleges'],
+  }
+  const App = Vue.createApp({
+    data() {
+      return {
+        msg1: '前端开放基础',
+        msg2:['css','javascript','html']
+      }
+    },
+    components:{
+      'click-box':box,
+    }
+  }).mount('#app');
+</script>
+</body>
+</html>

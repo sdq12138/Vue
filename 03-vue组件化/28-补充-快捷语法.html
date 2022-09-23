@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+  <div id="app">
+  </div>
+  <template id="son">
+    <p>==================</p>
+    <div>数据1:{{num1}}</div>
+    <div>数据2:{{num2}}</div>
+    <div>数据3:{{num3}}</div>
+    <p>==================</p>
+  </template>
+  <template id="father">
+    <lt-box :num1="a" :num2="b" :num3="c"></lt-box>
+    <lt-box v-bind="obj"></lt-box>
+    <lt-box :num1="obj.num1" :num2="obj.num2" :num3="obj.num3"></lt-box>
+  </template>
+  <script src="js/vue.js"></script>
+  <script>
+    const box = {
+      props:['num1','num2','num3'],
+      template:'#son'
+    };
+    const App = Vue.createApp({
+      data() {
+        return {
+          a:100,
+          b:150,
+          c:200,
+          obj:{
+            num1:100,
+            num2:150,
+            num3:200,
+          }
+        }
+      },
+      components:{
+        'lt-box':box,
+      },
+      template:'#father'
+    }).mount('#app');
+</script>
+</body>
+</html>

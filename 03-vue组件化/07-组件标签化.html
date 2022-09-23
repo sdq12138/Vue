@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <cl></cl>
+  <bb></bb>
+</div>
+<!--1、script标签-->
+<!--<script type="text/template" id="bb_box">&lt;!&ndash;使用该type，html才能识别它是模板&ndash;&gt;
+  <button @click="count++">点击了{{count}}次</button>
+</script>
+<script type="text/template" id="cl_click">&lt;!&ndash;使用该type，html才能识别它是模板&ndash;&gt;
+<div style="width: 100px;height: 100px;background-color: mediumpurple">盒子选项<cc></cc></div>
+</script>-->
+<!--2、template标签-->
+<template id="bb_box">
+  <button @click="count++">点击了{{count}}次</button>
+</template>
+<template id="cl_click">
+<div style="width: 100px;height: 100px;background-color: mediumpurple">盒子选项<cc></cc></div>
+</template>
+<!--2、template标签-->
+<script src="js/vue.js"></script>
+<script>
+  //局部组件比全局组件更常用
+  //局部组件1
+  const click = {
+    data(){//要使用变量时，可以用
+      return{
+        count:0
+      }
+    },
+    template:'#bb_box'
+  }
+  //局部组件2
+  const box = {
+    components: {
+      'cc':click,
+    },
+    template: '#cl_click'
+  }
+  //创建实例对象
+  const App = Vue.createApp({
+    data() {
+      return {
+      }
+    },
+    //组件选项
+    components:{
+      'cl':click,
+      'bb':box,
+    }
+  });
+  //挂载实例
+  App.mount('#app');
+</script>
+</body>
+</html>

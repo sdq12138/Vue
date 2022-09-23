@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+<div id="app">
+  <h1>姓名:{{name}},性别:{{sex}}</h1>
+</div>
+<script src="js/vue.js"></script>
+  <script>
+    /*
+    reactive:让引用类型的数据具备响应式(可以响应式更改内容)
+     */
+    const App = Vue.createApp({
+     setup(props,context){
+       //1.引入reactive
+       const {reactive,toRefs} = Vue;
+      let pObj = reactive({name:'张三',sex:'男'});
+
+      setTimeout(()=>{
+        pObj.name = '李礼';
+        pObj.sex = '女';
+      },2000)
+
+       //const {name,sex} = pObj;//从pObj里面解构出来，不具备响应式了
+       const {name,sex} = toRefs(pObj);//让解构出的重新具备响应式
+       /*
+       proxy({name:'张三',sex:'男'}) --->
+       name: proxy({value:'张三'})
+       sex: proxy({value:'男'})
+        */
+       return{
+         name,
+         sex,
+       }
+     },
+    }).mount('#app');
+  </script>
+</body>
+</html>

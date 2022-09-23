@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+<div id="app">
+  <lt-box ref="box1"></lt-box>
+  <button @click="getChildrenComponent">获取子组件</button>
+</div>
+<template id="box">
+  <div style="background-color: pink;width: 200px;height: 200px">
+    <button @click="cbox">点我</button>
+  </div>
+</template>
+<script src="js/vue.js"></script>
+<script>
+  const Box = {
+    data(){
+      return{
+          msg:'hello world'
+      }
+    },
+    template:'#box',
+    methods:{
+      cbox(){
+        alert('点击了按钮');
+      }
+    }
+  }
+  const App = Vue.createApp({
+    data() {
+      return {
+
+      }
+    },
+    components:{
+      'lt-box':Box
+    },
+    methods:{
+      getChildrenComponent(){
+        console.log(this.$refs.box1.msg);
+        this.$refs.box1.cbox();
+      }
+    }
+  }).mount('#app');
+</script>
+</body>
+</html>

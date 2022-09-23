@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+<div id="app">
+
+</div>
+<template id="father">
+  <lt-box info="我的信息" style="background-color: pink;width: 200px;height: 200px"></lt-box><!--此处传递的样式只绑定在子组件中最外面的div中-->
+</template>
+<template id="son">
+  <!--<div>我是子组件&#45;&#45;&#45;&#45;{{info}}</div>-->
+  <!--此处有三个同一级别的标签，不能no-props是不生效的-->
+  <div :s1="$attrs.info">我是子组件</div>
+  <div v-bind="$attrs">我是子组件</div><!--使用$attrs就能将以上no-props的东西传递进来-->
+  <p>=========================================</p>
+  <div :style="$attrs.style">我是子组件</div>
+</template>
+<script src="js/vue.js"></script>
+<script>
+  const App = Vue.createApp({
+    data() {
+      return {
+        msg: 'hello world'
+      }
+    },
+    template:'#father'
+  });
+  App.component('lt-box',{
+    //props:['info'],
+
+    //不接收no-props属性
+    //inheritAttrs:false,//要接收的话就不用写
+
+    mounted(){
+      console.log(this.$attrs);
+      console.log(this.$attrs.info);
+      console.log(this.$attrs.style);
+    },
+
+    template:'#son',
+  });
+  App.mount('#app');
+</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+<div id="app">
+  <input type="text" placeholder="请输入姓名" v-focus>
+  <!--一开始就选到输入框-->
+</div>
+<script src="js/vue.js"></script>
+<script>
+  /*
+    1、自定义局部指令
+    2、自定义全局指令
+  */
+  const ltDirective = {
+    focus:{
+      mounted(el){
+        el.focus();
+      }
+    }
+  };
+  const App = Vue.createApp({
+    data() {
+      return {
+        msg: 'hello world'
+      }
+    },
+    //挂载局部指令
+    directives:ltDirective,
+  });
+  //自定义全局指令
+  /*App.directive('focus',{
+    mounted(el){
+      el.focus();
+      //获得交点
+    }
+  });*/
+  App.mount('#app');
+</script>
+</body>
+</html>

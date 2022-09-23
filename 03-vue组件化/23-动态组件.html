@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+<div id="app">
+
+</div>
+<template id="click">
+  <!--<lt-click v-show="cClick === 'lt-click'" ></lt-click>
+  <lt-input v-show="cClick === 'lt-input'"></lt-input>-->
+ <!-- <component :is="cClick"></component>失活（失去活动交点）组件不能被缓存-->
+  <!--使用keep-alive能使组件保持缓存-->
+  <keep-alive>
+    <component :is="cClick"></component>
+  </keep-alive>
+  <p>-----------------------</p>
+  <button @click="change">切换显示</button></div>
+</template>
+<script src="js/vue.js"></script>
+<script>
+  const App = Vue.createApp({
+    data() {
+      return {
+        cClick:'lt-click',
+      }
+    },
+    methods:{
+      change(){
+        if(this.cClick === 'lt-click'){
+          this.cClick = 'lt-input';
+        }else{
+          this.cClick = 'lt-click';
+        }
+      }
+    },
+    template:'#click'
+  });
+  App.component('lt-click',{
+     template:'<button>点击一下</button>'
+  });
+  App.component('lt-input',{
+    template: '<input type="text">'
+  });
+  App.mount('#app');
+</script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  let obj1 = {};
+  let obj2 = {};
+  console.log(obj1 === obj2);
+  /*创建对象所创造出的地址及内容不同*/
+  let obj = {
+    name:'hello'
+  };
+  let p1 = obj;
+  let p2 = obj;
+  let p3 = obj;
+  /*将三个对象的地址和内容均指向了obj的*/
+  p1.name = 'hello world'//此时三个对象所指内容区一致，任何一个改变，都会让其他改变
+  console.log(p1,p2,p3);
+  console.log(p1 === p2);
+</script>
+</body>
+</html>

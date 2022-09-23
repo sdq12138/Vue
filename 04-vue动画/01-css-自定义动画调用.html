@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<style>
+  @keyframes shake{
+    0%{
+      transform:translateX(0);
+    }
+    50%{
+      transform:translateX(50px);
+    }
+    100%{
+      transform:translateX(0);
+    }
+  }
+  .box{
+    width: 100px;
+    height: 100px;
+    background-color: pink;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /*transition: all 2s ease-in;过度效果*/
+
+    animation: shake 2s infinite alternate;
+  }
+  /*.box:hover{
+    width: 400px;
+    height: 400px;
+    background-color: darkorchid;
+  }*/
+</style>
+<body>
+<div class="box">你好</div>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<!--如何区别函数与方法
+     通过对象去调用的是方法
+     直接去调用的是函数-->
+  <div id="app">
+    <p>1、常规用法</p>
+    <p>{{firstName + '·' + lastName}}</p>
+    <p>2、调用函数</p>
+    <p>{{gotFullName()}}</p>
+    <p>{{gotFullName()}}</p>
+    <p>{{gotFullName()}}</p>
+    <p>{{gotFullName()}}</p>
+    <p>{{gotFullName()}}</p>
+    <p>{{gotFullName()}}</p>
+    <p>{{gotFullName()}}</p>
+    <p>3、计算属性</p>
+    <p>{{fullName}}</p>
+    <p>{{fullName}}</p>
+    <p>{{fullName}}</p>
+    <p>{{fullName}}</p>
+    <p>{{fullName}}</p>
+    <p>{{fullName}}</p>
+  </div>
+  <script src="js/vue.js"></script>
+  <script>
+    const App = Vue.createApp({
+      data() {
+        return {
+          msg: 'hello world',//属性
+          firstName:'杰森',
+          lastName:'斯坦森'
+        }
+      },
+      //计算属性:有内部缓存
+      computed:{
+        fullName(){
+          console.log('-----FullName-----');
+          return this.firstName + '·' + this.lastName;
+        }
+      },
+      //函数:没有内部缓存
+      methods:{
+        gotFullName(){
+          console.log('-----gotFullName-----');
+          return this.firstName + '·' + this.lastName;
+        }
+      }
+      //在多次调用，且计算量大时，计算属性的效果好于函数
+    }).mount('#app');
+  </script>
+</body>
+</html>

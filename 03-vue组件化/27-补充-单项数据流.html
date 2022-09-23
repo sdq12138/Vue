@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+<div id="app">
+
+</div>
+<template id="son"><!--子组件模板-->
+  <div>传递的数据:{{total}}</div>
+  <button @click="total++">修改一下</button>
+  <p>=================================</p>
+  <div>自己的数据:{{myTotal}}</div>
+  <button @click="myTotal++">修改一下</button>
+</template>
+<template id="father"><!--父组件模板-->
+  <lt-box :total="count"></lt-box>
+</template>
+<script src="js/vue.js"></script>
+<script>
+  /**
+   * 小提示
+   * 父子数据传递中，父向子传递数据，形成单项流数据，若子组件中的数据想要更改父组件的数据则不满足单项数据流传递
+   */
+  const box = {
+    props:{
+      total:Number
+    },
+    data(){
+      return{
+        myTotal:this.total,
+      }
+    },
+    template:'#son'
+  }
+  const App = Vue.createApp({
+    data() {
+      return {
+        count:100
+      }
+    },
+    components:{
+      'lt-box':box,
+    },
+    template:'#father'
+  }).mount('#app');
+</script>
+</body>
+</html>

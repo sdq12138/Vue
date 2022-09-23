@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<style>
+  [v-cloak]{
+    display: none;
+  }
+</style>
+<body>
+<div id="app">
+  <h1 v-cloak style="color: red">{{msg}}</h1>
+</div>
+<script src="js/vue.js"></script>
+<script>
+  /**
+   * 使用v-cloak可以检测网络不好时的源码----解析前的源码
+   * Vue实例解析之前，h1标签有一个v-cloak属性
+   * Vue实例解析之后，h1标签没有了一个v-cloak属性
+   */
+  setTimeout(()=>{//使用了演示函数
+    const App = Vue.createApp({
+      data() {
+        return {
+          msg: 'hello world'
+        }
+      }
+    }).mount('#app');
+  },1000);
+</script>
+</body>
+</html>

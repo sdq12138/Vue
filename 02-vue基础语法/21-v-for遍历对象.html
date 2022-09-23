@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <ul>
+    <li v-for="(a,key,index) of person">{{index}}--{{key}}:{{a}}</li>
+    <!--  key->界 index->索引 -->
+  </ul>
+</div>
+<script src="js/vue.js"></script>
+<script>
+  const App = Vue.createApp({
+    data() {
+      return {
+        person: {
+          name:'张三',
+          age:25,
+          friends:['李四','王五'],
+        }
+      }
+    }
+  }).mount('#app');
+</script>
+</body>
+</html>

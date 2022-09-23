@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+<div id="app">
+  <count-click></count-click>
+  <count-click></count-click>
+  <count-click></count-click>
+  <count-click></count-click>
+  <count-click></count-click>
+</div>
+<template id="bt">
+  <div>
+    <p>计数器</p>
+    <p>{{count}}</p>
+    <button @click="sub">-</button>
+    <button @click="add">+</button>
+    <p>------------------------------</p>
+  </div>
+</template>
+<script src="js/vue.js"></script>
+<script>
+  const obj = {
+    count:0
+  }
+  const Count = {
+    data(){
+      /*return{
+        count:0//每次都返回一个新对象 ,每个count都是独立的
+      }*/
+    return obj;//返回的obj均指向一处，所以count值都指向一处，不独立
+    },
+    template:'#bt',
+    methods:{
+      sub(){
+        this.count--;
+      },
+      add(){
+        this.count++;
+      }
+    }
+  }
+  const App = Vue.createApp({
+    data() {
+      return {
+      }
+    },
+    components:{
+      'count-click':Count,
+    }
+  }).mount('#app');
+</script>
+</body>
+</html>

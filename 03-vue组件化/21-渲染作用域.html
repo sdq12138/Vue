@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head><!--父子组件中的isShow若要按自己的需求使用，得进行数据传递-->
+<body>
+<div id="app">
+  <lt-box v-show="isShow"></lt-box><!--此时作用的isShow是父组件app中定义的-->
+</div>
+<template id="box">
+  <div style="background-color: pink;width: 200px;height: 200px;margin: 20px">
+    <button v-show="isShow">点我试试</button><!--此时作用的isShow是子组件Box中定义的-->
+  </div>
+</template>
+<script src="js/vue.js"></script>
+<script>
+  const Box = {
+    data(){
+      return{
+        isShow:true
+      }
+    },
+    template:'#box'
+  };
+  const App = Vue.createApp({
+    data() {
+      return {
+        isShow:true
+      }
+    },
+    components:{
+      'lt-box':Box,
+    }
+  }).mount('#app');
+</script>
+</body>
+</html>

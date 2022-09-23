@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <!-- 1、lazy 失去交点后实现变更（按下enter键）实现用户输入完成后再实现内容变更-->
+  <input type="text" v-model.lazy="msg">
+  <h2>{{msg}}</h2>
+  <!-- 2、number 当用户在计算时需要number类型时可以使用该修饰符强制定义number类型-->
+  <input type="number" v-model.number="age">
+  <h2>{{age}} --- {{typeof age}}</h2>
+  <!-- 3、trim 在提交内容时可消去前后有空格的内容的空格-->
+  <input type="text" v-model.trim="name">
+  <h2>xxx{{name}}xxx</h2>
+</div>
+<script src="js/vue.js"></script>
+<script>
+  const App = Vue.createApp({
+    data() {
+      return {
+        msg: 'hello world',
+        age: 0,
+        name:''
+      }
+    }
+  }).mount('#app');
+</script>
+</body>
+</html>

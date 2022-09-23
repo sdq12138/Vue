@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<style>
+  .pink{
+    color: pink;
+  }
+</style>
+<body>
+<div id="app">
+  <!--1、勾选一个-->
+  <label class="pink">
+    <input type="checkbox" v-model="isAgree">同意协议
+  </label>
+  <h3>是否同意该协议:{{isAgree ? '同意' : '不同意'}}</h3>
+  <button :disabled="!isAgree" @click="run()">注册</button> <!--由协议控制能否注册-->
+  <p>===================================================</p>
+  <!--2、多选-->
+  <label>兴趣爱好</label>
+  <input type="checkbox" value="旅行" v-model="hobbies">旅行  <!--静态绑定-->
+  <input type="checkbox" value="美食" v-model="hobbies">美食
+  <input type="checkbox" value="摄影" v-model="hobbies">摄影
+  <input type="checkbox" value="游戏" v-model="hobbies">游戏
+  <p>用户的兴趣爱好是:{{hobbies}}</p>
+  <p>====================================================</p>
+  <!--3、值绑定-->
+  <label v-for="person in persons">
+    <input type="checkbox" :value="person" :id="person" v-model="choice">{{person}}<!--动态绑定-->
+  </label>
+  <p>用户的选择是{{choice}}</p>
+</div>
+<script src="js/vue.js"></script>
+<script>
+  const App = Vue.createApp({
+    data() {
+      return {
+        isAgree:false,
+        hobbies:[],
+        persons:['张三','李四','王五'],
+        choice:[],
+      }
+    },
+    methods:{
+      run(){
+        alert('注册成功');
+      }
+    }
+  }).mount('#app');
+</script>
+</body>
+</html>

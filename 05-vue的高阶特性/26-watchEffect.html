@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  品牌:<input v-model="brand">
+  <p>输入的品牌是{{brand}}</p>
+  <p>---------------------</p>
+  网址: <input v-model="site">
+  <p>输入的网址是: {{site}}</p>
+</div>
+<script src="js/vue.js"></script>
+<script>
+  const App = Vue.createApp({
+    setup(props,context){
+      const {ref,watch,watchEffect} = Vue;
+      let brand = ref('');
+      let site = ref('');
+
+      //侦听器 ----- 帧听一个属性
+      /*
+          1、有惰性（一开始进去没监视）
+          2、更加具体
+          3、可以访问属性之前的值
+          4、可配置的<非惰性的，深度监视>
+      */
+
+
+      /* watch(brand,(currentValue,preValue)=>{//当前值currentValue，之前值preValue
+         //执行相应业务
+         console.log('现在的',currentValue);
+         console.log('之前的',preValue);
+       },{
+         //惰性
+         immediate:false,//此处决定惰性（刚开始进来是否惰性）
+
+         deep:true,//深度监视
+       });*/
+
+      watchEffect(()=>{
+        /*
+          1、非惰性
+          2、更加抽象
+          3、不可以访问属性之前的值
+      */
+        console.log('开始帧听=======');
+        console.log(brand.value);
+        console.log(site.value);
+      });
+
+      return{
+        brand,
+        site
+      }
+    }
+  }).mount('#app');
+</script>
+</body>
+</html>

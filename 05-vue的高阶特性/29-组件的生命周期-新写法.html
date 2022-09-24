@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+  <div id="app">
+    <div @click="handleClick()">
+      <h1>{{msg}}</h1>
+    </div>
+  </div>
+  <script src="js/vue.js"></script>
+  <script>
+    const App = Vue.createApp({
+      setup(){
+        const {ref,onBeforeMount,onMounted,onRenderTracked,onRenderTriggered} = Vue;
+        let msg = ref('hello')
+
+        //在此之前有两个钩子被取消了
+        //1、在组件内容被渲染到页面之前调用
+        onBeforeMount(()=>{
+            console.log('beforeMount()');
+        })
+
+        //2、在组件内容被渲染到页面之后调用
+        onMounted(()=>{
+          console.log('Mounted()');
+        })
+
+        //每次渲染后重新收集响应式依赖
+        onRenderTracked(()=>{
+          console.log('onRenderTracked()');
+        })
+
+        //每次触发页面重新渲染时自动执行
+        onRenderTriggered(()=>{
+          console.log('onRenderTriggered()');
+        })
+
+        const handleClick = ()=>{
+          msg.value = '重新渲染'
+        }
+        return{
+          msg,
+          handleClick
+        }
+      },
+    });
+
+    App.mount('#app');
+  </script>
+</body>
+</html>

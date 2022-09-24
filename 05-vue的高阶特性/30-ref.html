@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+  <div id="app">
+    <div ref="brand">hello world</div>
+    <input ref="abc"  type="text">
+    <p></p>
+    <button>按钮</button>
+  </div>
+  <script src="js/vue.js"></script>
+  <script>
+    const App = Vue.createApp({
+      setup(){
+        const {onMounted,ref} = Vue;
+        const brand = ref(null)
+        const abc = ref(null)
+
+        onMounted(()=>{
+          console.log(brand.value)
+          console.log(abc.value)
+        })
+
+        return{
+          brand,
+          abc
+        }
+      }
+    }).mount('#app');
+  </script>
+</body>
+</html>

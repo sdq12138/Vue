@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+  <div id="app">
+    <ik-father></ik-father>
+  </div>
+
+  <template id="son">
+    <div style="width: 200px;height: 200px;background-color: green">
+      {{bName}}----------------{{bCollege}}
+      <button @click="changeName">修改</button>
+    </div>
+  </template>
+  <template id="father">
+    <div style="width: 400px;height: 400px;background-color: red">
+      父组件
+      <ik-son></ik-son>
+    </div>
+  </template>
+  <script src="js/vue.js"></script>
+  <script>
+    //1、孙组件
+    const ikSon = {
+      setup() {
+        const {inject} = Vue;
+        //订阅
+        const bName = inject('brand','默认值')//默认值是数据未发射时展示的值
+        const bCollege = inject('college')//默认值可有可无
+        const changeBrand = inject('changeBrand')
+
+        const changeName = ()=>{
+         // bName.value = 'itlike'
+          changeBrand('like');//这样修改才遵循了数据的单项流向
+        }
+
+        return{
+          bName,
+          bCollege,
+          changeName
+        }
+      },
+      template:'#son'
+    };
+
+    //2、子组件
+    const ikFather = {
+      components:{
+        'ik-son':ikSon
+      },
+      template: '#father'
+    };
+
+
+    const App = Vue.createApp({
+      setup(){
+        const {ref,reactive,provide,inject,readonly} = Vue;
+        let brand = ref('哈哈')
+        let college = reactive({city:'上海',site:'www.com'})
+
+        const  changeBrand = (params)=>{
+          brand.value = params
+        }
+
+        //发射
+        provide('brand',readonly(brand))//让它不能直接修改，只读形式，规避风险
+        provide('college',college)
+        provide('changeBrand',changeBrand)
+      },
+      components:{
+        'ik-father':ikFather
+      }
+    }).mount('#app');
+  </script>
+</body>
+</html>

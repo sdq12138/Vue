@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+  <div id="app">
+    <ik-father></ik-father>
+  </div>
+
+  <template id="son">
+    <div style="width: 200px;height: 200px;background-color: green">
+      {{bName}}----------------{{bCollege}}
+    </div>
+  </template>
+  <template id="father">
+    <div style="width: 400px;height: 400px;background-color: red">
+      父组件
+      <ik-son></ik-son>
+    </div>
+  </template>
+  <script src="js/vue.js"></script>
+  <script>
+    //1、孙组件
+    const ikSon = {
+      setup() {
+        const {inject} = Vue;
+        //订阅
+        const bName = inject('brand','默认值')//默认值是数据未发射时展示的值
+        const bCollege = inject('college')//默认值可有可无
+
+        return{
+          bName,
+          bCollege
+        }
+      },
+      template:'#son'
+    };
+
+    //2、子组件
+    const ikFather = {
+      components:{
+        'ik-son':ikSon
+      },
+      template: '#father'
+    };
+
+
+    const App = Vue.createApp({
+      setup(){
+        const {ref,reactive,provide,inject} = Vue;
+        let brand = ref('哈哈')
+        let college = reactive({city:'上海',site:'www.com'})
+
+        //发射
+        provide('brand',brand)
+        provide('college',college)
+      },
+      components:{
+        'ik-father':ikFather
+      }
+    }).mount('#app');
+  </script>
+</body>
+</html>
